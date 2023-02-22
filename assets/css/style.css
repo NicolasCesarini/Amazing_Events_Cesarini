@@ -1,0 +1,16 @@
+.main-logo {
+    display: flexbox;
+    margin: 0;
+    padding: 0;
+    width: 8em;
+    height: auto;
+    float: left;
+}
+
+.botones-nav{
+    display: flexbox;
+    /*justify-content: end;*/
+    position: absolute;
+    right: 1rem;
+    gap: 1rem;
+}
