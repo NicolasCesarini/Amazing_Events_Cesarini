@@ -1,3 +1,19 @@
+/* body{
+    display:flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+footer{
+    margin-top: auto;
+} */
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
 .main-logo {
     display: flexbox;
     margin: 0;
@@ -13,4 +29,70 @@
     position: absolute;
     right: 1rem;
     gap: 1rem;
+}
+
+i.fa-brands.fa-facebook.fa-2xl,
+i.fa-brands.fa-linkedin.fa-2xl,
+i.fa-brands.fa-instagram.fa-2xl{
+    color:grey;
+}
+
+i.fa-brands.fa-facebook.fa-2xl:hover{
+    color:rgb(2, 2, 253);
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.5);
+}
+
+i.fa-brands.fa-linkedin.fa-2xl:hover{
+    color:rgb(14, 170, 218);
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.5);
+}
+
+i.fa-brands.fa-instagram.fa-2xl:hover{
+    color:rgb(221, 75, 209);
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.5);
+}
+
+i.fa-solid.fa-user-lock.fa-2xl:hover{
+    color: rgb(0, 0, 0);
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.5);
+}
+
+.form-contact, .tablas{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: auto;
+    margin-inline: auto;
+}
+button{
+    width:max-content;
+    margin-left: auto;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid hsl(125, 42%, 49%);
+    gap:2rem;
+    min-height: 30rem;
+    
+}
+
+.details-figure{
+    margin: 0 2rem;
+    box-shadow: -1px -1px 1rem rgb(219, 18, 18);
+}
+
+.details-img{
+    object-fit: cover;
+}
+.details-info{
+    text-align: center;
+    width: 75%;
 }
