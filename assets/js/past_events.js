@@ -1,0 +1,38 @@
+const pastEvents = document.getElementById('past_cards')
+
+let tarjetas = ''
+
+function mostrarCards(eventos) {
+    for (card of eventos) {
+        tarjetas += `
+    <div class="card" style="width: 18rem;">
+      <img src=${card.image} class="card-img-top" alt="cinema">
+      <div class="card-body">
+        <p class="card-text">${card.date}</p>
+        <h5 class="card-title">${card.name}</h5>
+        <p class="card-text">${card.description}</p>
+        <p class="card-text">Price: ${card.price} U$D</p>
+        <a href="./details.html" class="btn btn-primary">Details</a>
+      </div>
+    </div>`
+    }
+    return tarjetas
+}
+
+function filtrarEventosPasados(eventos, fechaActual){
+    let eventosPasados=[]
+    for (i =0; i< eventos.length; i++ ){
+        if (eventos[i].date<fechaActual){
+            eventosPasados.push(eventos[i])
+        }
+    }
+    return eventosPasados
+}
+
+
+pastEvents.innerHTML = mostrarCards(filtrarEventosPasados(data.events, data.currentDate))
+
+
+
+
+
