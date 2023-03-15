@@ -8,7 +8,7 @@ const button = document.querySelector('button')
 
 function mostrarCards(eventos) {
     let tarjetas = ''
-    if(eventos.length == 0){
+    if (eventos.length == 0) {
         tarjetas = `<h2 class="display-1 fw-bolder">No hay coincidencias</h2>`
     }
     for (card of eventos) {
@@ -31,13 +31,13 @@ function mostrarCards(eventos) {
     homeEvents.innerHTML = tarjetas
 }
 
-function filtrarCategorias(eventos){
+function filtrarCategorias(eventos) {
     let categorias = eventos.map((event) => event.category)
     return categorias
 }
 
-function eliminarDuplicados(array){
-    arrayCategories=array.filter((element,index) => array.indexOf(element) == index)
+function eliminarDuplicados(array) {
+    arrayCategories = array.filter((element, index) => array.indexOf(element) == index)
     return arrayCategories
 };
 
@@ -53,9 +53,9 @@ function eliminarDuplicados(array){
 
 /* homeEvents.innerHTML = mostrarCards(data.events) */
 
-function searchBar(eventos){
+function searchBar(eventos) {
     let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value));
-        return eventFilter
+    return eventFilter
 }
 
 function mostrarCategorias(categorias) {
@@ -72,45 +72,9 @@ function mostrarCategorias(categorias) {
     categoryEvents.innerHTML = categories
 }
 
-/* arrayChecks.forEach(country => {
-    checkboxes += `<div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" role="switch" id="${country}" value="${country}">
-    <label class="form-check-label" for="${country}">${country}</label>
-  </div>`
-}) */
 
 
-
-
-/* function filtrarNumeros(array){
-    let radios = Array.from(document.querySelectorAll("input[type='radio']"))
-    console.log(radios)
-    let radioCheckeado = radios.filter(radio => radio.checked)[0]
-    console.log(radioCheckeado.value)
-    let elementosFiltrados = array.filter(elemento => elemento%2 == radioCheckeado.value || radioCheckeado.value == 'todos')
-    console.log(elementosFiltrados);
-    return elementosFiltrados
-} */
-
-
-/* const ul = document.querySelector('ul')
-let selected = [];
-
-ul.addEventListener('change', event => {
-  if (event.target.type === 'checkbox') {
-    const checked = document.querySelectorAll('input[type="checkbox"]:checked')    selected = Array.from(checked).map(x => x.value)  }
-}) */
-
-/* function checkboxesCategorias (){
-    let checked = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-    return checked
-}
-console.log(checkboxesCategorias()) */
-
-
-
-
-function filtrarPorCategoria(eventos){
+function filtrarPorCategoria(eventos) {
     let checkboxes = document.querySelectorAll("input[type='checkbox']")
     console.log(checkboxes);
     let arrayChecks = Array.from(checkboxes)
@@ -120,13 +84,13 @@ function filtrarPorCategoria(eventos){
     console.log(arrayChecksCheckedValues);
     let eventosFiltrado = eventos.filter(evento => arrayChecksCheckedValues.includes(evento.category))
     console.log(eventosFiltrado);
-    if(arrayChecksChecked.length > 0){
+    if (arrayChecksChecked.length > 0) {
         return eventosFiltrado
     }
     return eventos
 }
 
-function superFiltro(){
+function superFiltro() {
     let primerFiltro = searchBar(data.events)
     let segundoFiltro = filtrarPorCategoria(primerFiltro)
     mostrarCards(segundoFiltro)
@@ -142,9 +106,9 @@ search.addEventListener('keyup',()=>{
 }) */
 mostrarCards(data.events)
 mostrarCategorias(eliminarDuplicados(filtrarCategorias(data.events)))
-search.addEventListener('input',superFiltro)
+search.addEventListener('input', superFiltro)
 
-categoryEvents.addEventListener('change',superFiltro)
+categoryEvents.addEventListener('change', superFiltro)
 
 
 /* console.log((eliminarDuplicados(filtrarCategorias(data.events))))

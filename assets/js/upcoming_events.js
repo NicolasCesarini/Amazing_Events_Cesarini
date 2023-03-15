@@ -5,7 +5,7 @@ const categoryEvents = document.getElementById('categories')
 
 function mostrarCards(eventos) {
     let tarjetas = ''
-    if(eventos.length == 0){
+    if (eventos.length == 0) {
         tarjetas = `<h2 class="display-1 fw-bolder">No hay coincidencias</h2>`
     }
     for (card of eventos) {
@@ -28,76 +28,76 @@ function mostrarCards(eventos) {
     upcomingEvents.innerHTML = tarjetas
 }
 
-function filtrarEventosFuturos(eventos, fechaActual){
-    let eventosFuturos = eventos.filter((event) => event.date>fechaActual)
+function filtrarEventosFuturos(eventos, fechaActual) {
+    let eventosFuturos = eventos.filter((event) => event.date > fechaActual)
     return eventosFuturos
 }
 
-function filtrarCategorias(eventos){
+function filtrarCategorias(eventos) {
     let categorias = eventos.map((event) => event.category)
     return categorias
 }
 
-function eliminarDuplicados(array){
-    arrayCategories=array.filter((element,index) => array.indexOf(element) == index)
+function eliminarDuplicados(array) {
+    arrayCategories = array.filter((element, index) => array.indexOf(element) == index)
     return arrayCategories
 };
 console.log(eliminarDuplicados(filtrarCategorias(data.events)))
 
 
-let filtro=filtrarEventosFuturos(data.events, data.currentDate)
-function searchBar(eventos){
+let filtro = filtrarEventosFuturos(data.events, data.currentDate)
+function searchBar(eventos) {
     let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value));
-        return eventFilter
-    }
+    return eventFilter
+}
 
 
-    function mostrarCategorias(categorias) {
-        let categories = ``
-        for (categoria of categorias) {/* for each */
-            categories += `
+function mostrarCategorias(categorias) {
+    let categories = ``
+    for (categoria of categorias) {/* for each */
+        categories += `
             <div class="form-check">
             <input class="form-check-input" type="checkbox" id="${categoria}" value="${categoria}" id="flexCheckDefault">
             <label class="form-check-label" for="${categoria}">
             ${categoria}
             </label>
           </div>`
-        }
-        categoryEvents.innerHTML = categories
     }
+    categoryEvents.innerHTML = categories
+}
 
 
-    function filtrarPorCategoria(eventos){
-        let checkboxes = document.querySelectorAll("input[type='checkbox']")
-        console.log(checkboxes);
-        let arrayChecks = Array.from(checkboxes)
-        let arrayChecksChecked = arrayChecks.filter(check => check.checked)
-        console.log(arrayChecksChecked);
-        let arrayChecksCheckedValues = arrayChecksChecked.map(checkChecked => checkChecked.value)
-        console.log(arrayChecksCheckedValues);
-        let eventosFiltrado = eventos.filter(evento => arrayChecksCheckedValues.includes(evento.category))
-        console.log(eventosFiltrado);
-        if(arrayChecksChecked.length > 0){
-            return eventosFiltrado
-        }
-        return eventos
+function filtrarPorCategoria(eventos) {
+    let checkboxes = document.querySelectorAll("input[type='checkbox']")
+    console.log(checkboxes);
+    let arrayChecks = Array.from(checkboxes)
+    let arrayChecksChecked = arrayChecks.filter(check => check.checked)
+    console.log(arrayChecksChecked);
+    let arrayChecksCheckedValues = arrayChecksChecked.map(checkChecked => checkChecked.value)
+    console.log(arrayChecksCheckedValues);
+    let eventosFiltrado = eventos.filter(evento => arrayChecksCheckedValues.includes(evento.category))
+    console.log(eventosFiltrado);
+    if (arrayChecksChecked.length > 0) {
+        return eventosFiltrado
     }
-    
-    function superFiltro(){
-        let primerFiltro = searchBar(filtro)
-        let segundoFiltro = filtrarPorCategoria(primerFiltro)
-        mostrarCards(segundoFiltro)
-    }
-    
-    
-    
-    
-    
-    mostrarCards(searchBar(filtro))
-    mostrarCategorias(eliminarDuplicados(filtrarCategorias(filtro)))
-    search.addEventListener('input',superFiltro)
-    
-    categoryEvents.addEventListener('change',superFiltro)
+    return eventos
+}
+
+function superFiltro() {
+    let primerFiltro = searchBar(filtro)
+    let segundoFiltro = filtrarPorCategoria(primerFiltro)
+    mostrarCards(segundoFiltro)
+}
+
+
+
+
+
+mostrarCards(searchBar(filtro))
+mostrarCategorias(eliminarDuplicados(filtrarCategorias(filtro)))
+search.addEventListener('input', superFiltro)
+
+categoryEvents.addEventListener('change', superFiltro)
 
 
 
