@@ -1,8 +1,15 @@
 const pastEvents = document.getElementById('past_cards')
+const search = document.getElementById('search-box');
+const categoryEvents = document.getElementById('categories')
+/* const button_submit = document.getElementById('button'); */
 
-let tarjetas = ''
+
 
 function mostrarCards(eventos) {
+    let tarjetas = ''
+    if(eventos.length == 0){
+        tarjetas = `<h2 class="display-1 fw-bolder">No hay coincidencias</h2>`
+    }
     for (card of eventos) {
         tarjetas += `
     <div class="card" style="width: 18rem;">
@@ -15,15 +22,15 @@ function mostrarCards(eventos) {
             </div>
             <div class="d-flex flex-column justify-content-between align-items-center">
                 <p class="card-text">Price: ${card.price} U$D</p>
-                <a href="./details.html" class="btn btn-primary">Details</a>
+                <a href="./details.html?id=${card._id}" class="btn btn-primary">Details</a>
             </div>
       </div>
     </div>`
     }
-    return tarjetas
+    pastEvents.innerHTML = tarjetas
 }
 
-function filtrarEventosPasados(eventos, fechaActual){
+/* function filtrarEventosPasados(eventos, fechaActual){
     let eventosPasados=[]
     for (i =0; i< eventos.length; i++ ){
         if (eventos[i].date<fechaActual){
@@ -31,10 +38,91 @@ function filtrarEventosPasados(eventos, fechaActual){
         }
     }
     return eventosPasados
+} */
+function filtrarEventosPasados(eventos, fechaActual){
+    let eventosPasados = eventos.filter((event) => event.date<fechaActual)
+    return eventosPasados
 }
 
+function filtrarCategorias(eventos){
+    let categorias = eventos.map((event) => event.category)
+    return categorias
+}
 
-pastEvents.innerHTML = mostrarCards(filtrarEventosPasados(data.events, data.currentDate))
+function eliminarDuplicados(array){
+    arrayCategories=array.filter((element,index) => array.indexOf(element) == index)
+    return arrayCategories
+};
+console.log(eliminarDuplicados(filtrarCategorias(data.events)))
+
+
+
+
+console.log(filtrarCategorias(data.events))
+
+
+/* pastEvents.innerHTML = mostrarCards(filtrarEventosPasados(data.events, data.currentDate))
+filtrarEventosPasados(data.events, data.currentDate) */
+/* console.log(data.events) */
+let filtro=filtrarEventosPasados(data.events, data.currentDate)
+function searchBar(eventos){
+    let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value));
+        return eventFilter
+    }
+
+/* button_submit.addEventListener(,mostrarCards(searchBar()) */
+/* button_submit.addEventListener("click", (event) => {
+    instrucción
+     }); */
+
+     function mostrarCategorias(categorias) {
+        let categories = ``
+        for (categoria of categorias) {/* for each */
+            categories += `
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="${categoria}" value="${categoria}" id="flexCheckDefault">
+            <label class="form-check-label" for="${categoria}">
+            ${categoria}
+            </label>
+          </div>`
+        }
+        categoryEvents.innerHTML = categories
+    }
+
+
+    function filtrarPorCategoria(eventos){
+        let checkboxes = document.querySelectorAll("input[type='checkbox']")
+        console.log(checkboxes);
+        let arrayChecks = Array.from(checkboxes)
+        let arrayChecksChecked = arrayChecks.filter(check => check.checked)
+        console.log(arrayChecksChecked);
+        let arrayChecksCheckedValues = arrayChecksChecked.map(checkChecked => checkChecked.value)
+        console.log(arrayChecksCheckedValues);
+        let eventosFiltrado = eventos.filter(evento => arrayChecksCheckedValues.includes(evento.category))
+        console.log(eventosFiltrado);
+        if(arrayChecksChecked.length > 0){
+            return eventosFiltrado
+        }
+        return eventos
+    }
+    
+    function superFiltro(){
+        let primerFiltro = searchBar(filtro)
+        let segundoFiltro = filtrarPorCategoria(primerFiltro)
+        mostrarCards(segundoFiltro)
+    }
+    
+    
+    
+    
+    
+    mostrarCards(searchBar(filtro))
+    mostrarCategorias(eliminarDuplicados(filtrarCategorias(filtro)))
+    search.addEventListener('input',superFiltro)
+    
+    categoryEvents.addEventListener('change',superFiltro)
+
+/* pastEvents.innerHTML = mostrarCards(searchBar(filtro)) */
 
 
 
