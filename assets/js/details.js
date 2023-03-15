@@ -1,16 +1,11 @@
 const querySearch = document.location.search
 const id = new URLSearchParams(querySearch).get("id")
 
-console.log(id);
-
 const detalles = data.events.find(evento => evento._id == id)
 
-console.log(detalles)
-const containerCards = document.getElementById("details")
+const details = document.getElementById("details")
 
-console.log(containerCards)
-
-containerCards.innerHTML = ` 
+details.innerHTML = ` 
 
 <figure class="details-figure">
     <img src="${detalles.image}" class="details-img" alt="details-img">
@@ -22,7 +17,7 @@ containerCards.innerHTML = `
     <p>Category: ${detalles.category}</p>
     <p>Capacity: ${detalles.capacity}</p>
     <p>${detalles.assistance !== undefined ? "Assistance: " : "Assistance Estimate: "}${detalles.assistance !== undefined ? detalles.assistance : detalles.estimate}</p>
-    <p>Price: $${detalles.price}</p>
+    <p>Price: ${detalles.price}U$D</p>
 </article>
 
 `

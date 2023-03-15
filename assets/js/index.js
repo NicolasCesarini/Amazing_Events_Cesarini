@@ -11,7 +11,7 @@ function mostrarCards(eventos) {
     if (eventos.length == 0) {
         tarjetas = `<h2 class="display-1 fw-bolder">No hay coincidencias</h2>`
     }
-    for (card of eventos) {
+    eventos.forEach(card => {
         tarjetas += `
     <div class="card" style="width: 18rem;">
       <img src=${card.image} class="card-img-top img" alt="cinema">
@@ -27,9 +27,11 @@ function mostrarCards(eventos) {
             </div>
       </div>
     </div>`
-    }
+    });
     homeEvents.innerHTML = tarjetas
 }
+
+
 
 function filtrarCategorias(eventos) {
     let categorias = eventos.map((event) => event.category)
@@ -54,23 +56,24 @@ function eliminarDuplicados(array) {
 /* homeEvents.innerHTML = mostrarCards(data.events) */
 
 function searchBar(eventos) {
-    let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value));
+    let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value.toLowerCase()));
     return eventFilter
 }
 
 function mostrarCategorias(categorias) {
     let categories = ``
-    for (categoria of categorias) {/* for each */
+    categorias.forEach(categoria => {
         categories += `
-        <div class="form-check mx-2">
-        <input class="form-check-input" type="checkbox" id="${categoria}" value="${categoria}" id="flexCheckDefault">
-        <label class="form-check-label" for="${categoria}">
-        ${categoria}
-        </label>
-      </div>`
-    }
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="${categoria}" value="${categoria}" id="flexCheckDefault">
+            <label class="form-check-label" for="${categoria}">
+            ${categoria}
+            </label>
+          </div>`
+    });
     categoryEvents.innerHTML = categories
-}
+    
+    }
 
 
 

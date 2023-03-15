@@ -10,9 +10,9 @@
     min-height: 100%;
 }
 */
-footer {
+/* footer {
     margin-top: auto;
-}
+} */
 
 body {
     min-height: 100vh;
@@ -21,7 +21,7 @@ body {
     background: linear-gradient(45deg,
         rgb(216, 202, 7),
         rgba(0, 0, 0, 0.265));
-            
+    justify-content: space-between; /* el primer elemento al principio, el último elemento al final y los del medio en el centro distrubuidos */
     }
 
     .list-group{
@@ -119,11 +119,11 @@ body {
         border: 2px solid hsl(125, 42%, 49%);
         gap: 2rem;
         min-height: 30rem;
-
+        margin-top: auto !important;
     }
 
     .details-figure {
-        margin: 0 2rem;
+        margin: 1rem 2rem;
         box-shadow: -1px -1px 1rem rgb(219, 18, 18);
     }
 
@@ -139,4 +139,7 @@ body {
     .card-title,
 .card-text {
     text-align: center;
+}
+.mainDetails{
+    align-items: center !important;
 }

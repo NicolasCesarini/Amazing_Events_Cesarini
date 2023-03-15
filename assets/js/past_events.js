@@ -5,12 +5,14 @@ const categoryEvents = document.getElementById('categories')
 
 
 
+
+
 function mostrarCards(eventos) {
     let tarjetas = ''
     if (eventos.length == 0) {
         tarjetas = `<h2 class="display-1 fw-bolder">No hay coincidencias</h2>`
     }
-    for (card of eventos) {
+    eventos.forEach(card => {
         tarjetas += `
     <div class="card" style="width: 18rem;">
       <img src=${card.image} class="card-img-top img" alt="cinema">
@@ -26,7 +28,7 @@ function mostrarCards(eventos) {
             </div>
       </div>
     </div>`
-    }
+    });
     pastEvents.innerHTML = tarjetas
 }
 
@@ -74,7 +76,7 @@ function searchBar(eventos) {
 
 function mostrarCategorias(categorias) {
     let categories = ``
-    for (categoria of categorias) {/* for each */
+    categorias.forEach(categoria => {
         categories += `
             <div class="form-check">
             <input class="form-check-input" type="checkbox" id="${categoria}" value="${categoria}" id="flexCheckDefault">
@@ -82,9 +84,10 @@ function mostrarCategorias(categorias) {
             ${categoria}
             </label>
           </div>`
-    }
+    });
     categoryEvents.innerHTML = categories
-}
+    
+    }
 
 
 function filtrarPorCategoria(eventos) {
