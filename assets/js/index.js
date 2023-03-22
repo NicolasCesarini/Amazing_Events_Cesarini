@@ -6,6 +6,29 @@ const button = document.querySelector('button')
 
 
 
+async function obtenerEventos() {
+    data = await fetch("https://mindhub-xj03.onrender.com/api/amazing")
+        .then(response => response.json())
+        .then(data => {
+            
+            return data;
+        })
+    return data
+}
+
+
+async function obtenerArray(){
+    let arrayEventos = await obtenerEventos()
+    console.log(arrayEventos)
+    mostrarCards(arrayEventos.events)
+    mostrarCategorias(eliminarDuplicados(filtrarCategorias(arrayEventos.events)))
+   
+
+}
+
+obtenerArray()
+
+
 function mostrarCards(eventos) {
     let tarjetas = ''
     if (eventos.length == 0) {
@@ -43,17 +66,7 @@ function eliminarDuplicados(array) {
     return arrayCategories
 };
 
-/* function filtrarEventosPasados(eventos, fechaActual){
-    let eventosPasados=[]
-    for (i =0; i< eventos.length; i++ ){
-        if (eventos[i].date<fechaActual){
-            eventosPasados.push(data[i])
-        }
-    }
-    return eventosPasados
-} */
 
-/* homeEvents.innerHTML = mostrarCards(data.events) */
 
 function searchBar(eventos) {
     let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value.toLowerCase()));
@@ -102,17 +115,13 @@ function superFiltro() {
 
 
 
-/* let searchValue="" */
-/* homeEvents.innerHTML = mostrarCards(searchBar(data.events));
-search.addEventListener('keyup',()=>{
-    homeEvents.innerHTML = mostrarCards(searchBar(data.events));
-}) */
-mostrarCards(data.events)
-mostrarCategorias(eliminarDuplicados(filtrarCategorias(data.events)))
+
+
 search.addEventListener('input', superFiltro)
 
 categoryEvents.addEventListener('change', superFiltro)
 
 
-/* console.log((eliminarDuplicados(filtrarCategorias(data.events))))
-console.log(mostrarCategorias(eliminarDuplicados(filtrarCategorias(data.events)))) */
+
+
+

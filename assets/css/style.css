@@ -35,7 +35,7 @@ body {
 
     }
 
-    @media screen and (min-width:768px) {
+    @media screen and (min-width:991px) {
         .navbar-collapse {
             position: absolute;
             right: 0;
@@ -101,9 +101,20 @@ body {
     .tablas {
         display: flex;
         flex-direction: column;
-        width: 80%;
+        width: 95%;
         height: auto;
         margin-inline: auto;
+    }
+
+    @media screen and (min-width:991px) {
+        .form-contact,
+        .tablas {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            height: auto;
+            margin-inline: auto;
+        }
     }
 
     button {

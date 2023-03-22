@@ -3,6 +3,29 @@ const search = document.getElementById('search-box');
 const categoryEvents = document.getElementById('categories')
 
 
+async function obtenerEventos() {
+    data = await fetch("https://mindhub-xj03.onrender.com/api/amazing")
+        .then(response => response.json())
+        .then(data => {
+            
+            return data;
+        })
+    return data
+}
+
+
+async function obtenerArray(){
+    let arrayEventos = await obtenerEventos()
+    console.log(arrayEventos)
+    let filtro = filtrarEventosFuturos(arrayEventos.events, arrayEventos.currentDate)
+    mostrarCards(filtro)
+    mostrarCategorias(eliminarDuplicados(filtrarCategorias(filtro)))
+
+}
+
+obtenerArray()
+
+
 function mostrarCards(eventos) {
     let tarjetas = ''
     if (eventos.length == 0) {
@@ -44,10 +67,10 @@ function eliminarDuplicados(array) {
     arrayCategories = array.filter((element, index) => array.indexOf(element) == index)
     return arrayCategories
 };
-console.log(eliminarDuplicados(filtrarCategorias(data.events)))
 
 
-let filtro = filtrarEventosFuturos(data.events, data.currentDate)
+
+
 function searchBar(eventos) {
     let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value));
     return eventFilter
@@ -88,7 +111,7 @@ function filtrarPorCategoria(eventos) {
 }
 
 function superFiltro() {
-    let primerFiltro = searchBar(filtro)
+    let primerFiltro = searchBar(filtrarEventosFuturos(data.events, data.currentDate))
     let segundoFiltro = filtrarPorCategoria(primerFiltro)
     mostrarCards(segundoFiltro)
 }
@@ -97,12 +120,9 @@ function superFiltro() {
 
 
 
-mostrarCards(searchBar(filtro))
-mostrarCategorias(eliminarDuplicados(filtrarCategorias(filtro)))
-search.addEventListener('input', superFiltro)
+
 
 categoryEvents.addEventListener('change', superFiltro)
 
 
 
-/* upcomingEvents.innerHTML = mostrarCards(filtrarEventosFuturos(data.events, data.currentDate)) */

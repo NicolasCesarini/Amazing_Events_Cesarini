@@ -2,8 +2,27 @@ const pastEvents = document.getElementById('past_cards')
 const search = document.getElementById('search-box');
 const categoryEvents = document.getElementById('categories')
 
+async function obtenerEventos() {
+    data = await fetch("https://mindhub-xj03.onrender.com/api/amazing")
+        .then(response => response.json())
+        .then(data => {
+            
+            return data;
+        })
+    return data
+}
 
 
+async function obtenerArray(){
+    let arrayEventos = await obtenerEventos()
+    console.log(arrayEventos)
+    let filtro = filtrarEventosPasados(arrayEventos.events, arrayEventos.currentDate)
+    mostrarCards(filtro)
+    mostrarCategorias(eliminarDuplicados(filtrarCategorias(filtro)))
+
+}
+
+obtenerArray()
 
 
 
@@ -32,15 +51,7 @@ function mostrarCards(eventos) {
     pastEvents.innerHTML = tarjetas
 }
 
-/* function filtrarEventosPasados(eventos, fechaActual){
-    let eventosPasados=[]
-    for (i =0; i< eventos.length; i++ ){
-        if (eventos[i].date<fechaActual){
-            eventosPasados.push(eventos[i])
-        }
-    }
-    return eventosPasados
-} */
+
 function filtrarEventosPasados(eventos, fechaActual) {
     let eventosPasados = eventos.filter((event) => event.date < fechaActual)
     return eventosPasados
@@ -55,18 +66,7 @@ function eliminarDuplicados(array) {
     arrayCategories = array.filter((element, index) => array.indexOf(element) == index)
     return arrayCategories
 };
-console.log(eliminarDuplicados(filtrarCategorias(data.events)))
 
-
-
-
-console.log(filtrarCategorias(data.events))
-
-
-/* pastEvents.innerHTML = mostrarCards(filtrarEventosPasados(data.events, data.currentDate))
-filtrarEventosPasados(data.events, data.currentDate) */
-/* console.log(data.events) */
-let filtro = filtrarEventosPasados(data.events, data.currentDate)
 function searchBar(eventos) {
     let eventFilter = eventos.filter((event) => event.name.toLowerCase().includes(search.value));
     return eventFilter
@@ -107,7 +107,7 @@ function filtrarPorCategoria(eventos) {
 }
 
 function superFiltro() {
-    let primerFiltro = searchBar(filtro)
+    let primerFiltro = searchBar(filtrarEventosPasados(data.events, data.currentDate)) // preguntar
     let segundoFiltro = filtrarPorCategoria(primerFiltro)
     mostrarCards(segundoFiltro)
 }
@@ -116,13 +116,12 @@ function superFiltro() {
 
 
 
-mostrarCards(searchBar(filtro))
-mostrarCategorias(eliminarDuplicados(filtrarCategorias(filtro)))
+
 search.addEventListener('input', superFiltro)
 
 categoryEvents.addEventListener('change', superFiltro)
 
-/* pastEvents.innerHTML = mostrarCards(searchBar(filtro)) */
+
 
 
 
