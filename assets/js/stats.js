@@ -34,9 +34,9 @@ async function obtenerArray() {
     tabla_max_min.innerHTML = ` 
 
     <tr>
-        <td>${tabla1.mayorPorcentaje.name}: ${tabla1.mayorPorcentaje.porcentaje}%</td>
-        <td>${tabla1.menorPorcentaje.name}: ${tabla1.menorPorcentaje.porcentaje}%</td>
-        <td>${tabla1.mayorCapacidad.name}: (${tabla1.mayorCapacidad.capacity})</td>
+        <td class="eventosTabla">${tabla1.mayorPorcentaje.name}: ${tabla1.mayorPorcentaje.porcentaje}%</td>
+        <td class="eventosTabla">${tabla1.menorPorcentaje.name}: ${tabla1.menorPorcentaje.porcentaje}%</td>
+        <td class="eventosTabla">${tabla1.mayorCapacidad.name}: (${tabla1.mayorCapacidad.capacity})</td>
     </tr>
     `
 
@@ -44,6 +44,7 @@ async function obtenerArray() {
     let categoriasFuturas = eliminarDuplicados(filtrarCategorias(eventosFuturos))
 
     let tablaPasado = tablaCategorias(categoriasPasadas, eventosPasados)
+    console.log(tablaPasado)
     let tablaFuturo = tablaCategorias(categoriasFuturas, eventosFuturos)
 
 
@@ -122,7 +123,7 @@ function imprimirTablas(array, tabla) {
         porcentajeTablaPromedio = porcentajeTabla / (array[i].length)
         tablaHTML += `
     <tr>
-        <td>${categoria}</td>
+        <td class="eventosTabla">${categoria}</td>
         <td>${revenue} U$D</td>
         <td>${parseFloat(porcentajeTablaPromedio.toFixed(2))}%</td>
     </tr>`

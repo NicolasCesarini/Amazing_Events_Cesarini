@@ -147,6 +147,20 @@ body {
 .card-text {
     text-align: center;
 }
+
 .mainDetails{
     align-items: center !important;
+}
+
+td{
+    width: 33%;
+    text-align: right;
+}
+
+th{
+    text-align: center;
+}
+
+.eventosTabla{
+    text-align: center;
 }
