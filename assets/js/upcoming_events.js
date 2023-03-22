@@ -92,8 +92,6 @@ function mostrarCategorias(categorias) {
     
     }
 
-
-
 function filtrarPorCategoria(eventos) {
     let checkboxes = document.querySelectorAll("input[type='checkbox']")
     console.log(checkboxes);
@@ -117,12 +115,6 @@ function superFiltro() {
 }
 
 
-
-
-
-
+search.addEventListener('input', superFiltro)
 
 categoryEvents.addEventListener('change', superFiltro)
-
-
-

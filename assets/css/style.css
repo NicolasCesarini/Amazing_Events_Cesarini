@@ -109,11 +109,7 @@ body {
     @media screen and (min-width:991px) {
         .form-contact,
         .tablas {
-            display: flex;
-            flex-direction: column;
             width: 80%;
-            height: auto;
-            margin-inline: auto;
         }
     }
 
