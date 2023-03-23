@@ -23,22 +23,9 @@ async function obtenerArray() {
 
     let eventosPasados = filtrarEventosPasados(arrayEventos.events, arrayEventos.currentDate)
     let eventosFuturos = filtrarEventosFuturos(arrayEventos.events, arrayEventos.currentDate)
-    let tabla1 = {
-        'mayorCapacidad': eventosPasados.sort(function (a, b) { return b.capacity - a.capacity })[0],
-        'mayorPorcentaje': eventosPasados.sort(function (a, b) { return b.porcentaje - a.porcentaje })[0],
-        'menorPorcentaje': eventosPasados.sort(function (a, b) { return a.porcentaje - b.porcentaje })[0]
-    }
+    
+    minMaxTabla(eventosPasados)
 
-
-
-    tabla_max_min.innerHTML = ` 
-
-    <tr>
-        <td class="eventosTabla">${tabla1.mayorPorcentaje.name}: ${tabla1.mayorPorcentaje.porcentaje}%</td>
-        <td class="eventosTabla">${tabla1.menorPorcentaje.name}: ${tabla1.menorPorcentaje.porcentaje}%</td>
-        <td class="eventosTabla">${tabla1.mayorCapacidad.name}: (${tabla1.mayorCapacidad.capacity})</td>
-    </tr>
-    `
 
     let categoriasPasadas = eliminarDuplicados(filtrarCategorias(eventosPasados))
     let categoriasFuturas = eliminarDuplicados(filtrarCategorias(eventosFuturos))
@@ -108,6 +95,22 @@ function tablaCategorias(arrayCategorias, eventos) {
     return tabla
 }
 
+function minMaxTabla(eventos){
+    let tabla1 = {
+        'mayorCapacidad': eventos.sort(function (a, b) { return b.capacity - a.capacity })[0],
+        'mayorPorcentaje': eventos.sort(function (a, b) { return b.porcentaje - a.porcentaje })[0],
+        'menorPorcentaje': eventos.sort(function (a, b) { return a.porcentaje - b.porcentaje })[0]
+    }
+
+    tabla_max_min.innerHTML = ` 
+
+    <tr>
+        <td class="eventosTabla">${tabla1.mayorPorcentaje.name}: ${tabla1.mayorPorcentaje.porcentaje}%</td>
+        <td class="eventosTabla">${tabla1.menorPorcentaje.name}: ${tabla1.menorPorcentaje.porcentaje}%</td>
+        <td class="eventosTabla">${tabla1.mayorCapacidad.name}: (${tabla1.mayorCapacidad.capacity})</td>
+    </tr>
+    `
+}
 function imprimirTablas(array, tabla) {
     let tablaHTML = ``
     for (let i = 0; i < array.length; i++) {
